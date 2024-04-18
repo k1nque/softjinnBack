@@ -1,0 +1,90 @@
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+.header {
+    background-color: #74a9eb; /* Голубой цвет для шапки */
+    padding: 15px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 10%;
+}
+.add-idea-button {
+    width: 150px; /* Ширина кнопки 150px */
+    background-color: #4caf50; /* Зеленый цвет для кнопки */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px; /* Скругление кнопки */
+    cursor: pointer;
+}
+.add-idea-button:hover {
+    background-color: #45a049; /* Изменение цвета при наведении */
+}
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
+    z-index: 1;
+}
+#add-idea-popup {
+    background-color: #ffffff; /* Светлый цвет для окна ввода */
+    padding: 20px;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 400px;
+    box-sizing: border-box;
+    border-radius: 10px; /* Скругление окна ввода */
+    z-index: 2;
+}
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #888;
+    cursor: pointer;
+}
+input[type="text"],
+textarea,
+button {
+    padding: 8px;
+    margin-bottom: 15px;
+    width: 100%;
+    border-radius: 5px; /* Скругление полей ввода */
+    border: 3px solid #ccc;
+    box-sizing: border-box;
+}
+button[type="submit"] {
+    background-color: #4caf50; /* Зеленый цвет для кнопки "Отправить" */
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px; /* Скругление кнопки "Отправить" */
+}
+button[type="submit"]:hover {
+    background-color: #45a049; /* Изменение цвета при наведении на кнопку "Отправить" */
+}
+.ideas-panel {
+    margin-top: 20px;
+    width: 80%; /* Ширина панели с идеями 80% */
+    margin: auto;
+}
+.idea {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 10px;
+}

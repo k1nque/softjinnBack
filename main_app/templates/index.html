@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="{% static 'main_app/styles/style.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сайт для хранения идей</title>
+</head>
+<body>
+    <div class="header">
+        <button class="add-idea-button" onclick="toggleAddIdea()">Добавить идею</button>
+    </div>
+
+    <div id="overlay"></div>
+
+    <div id="add-idea-popup">
+        <span class="close-button" onclick="toggleAddIdea()">&times;</span>
+        <h2>Добавить идею</h2>
+        <form id="add-idea-form">
+            <label for="short-description">Краткое описание:</label><br>
+            <input type="text" id="short-description" name="short-description"><br>
+            <label for="details">Подробности:</label><br>
+            <textarea id="details" name="details" rows="4"></textarea><br>
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+
+    <div class="ideas-panel" id="ideas-panel">
+        <!-- Панель для добавленных идей будет появляться здесь -->
+    </div>
+
+    <script>
+        function toggleAddIdea() {
+            var overlay = document.getElementById("overlay");
+            var addIdeaPopup = document.getElementById("add-idea-popup");
+
+            overlay.style.display = overlay.style.display === "none" ? "block" : "none";
+            addIdeaPopup.style.display = addIdeaPopup.style.display === "none" ? "block" : "none";
+        }
+
+        document.getElementById("add-idea-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            let shortDescription = document.getElementById("short-description").value;
+            let details = document.getElementById("details").value;
+            addIdea(shortDescription, details);
+            document.getElementById("add-idea-form").reset();
+            toggleAddIdea();
+        });
+
+        function addIdea(shortDescription, details) {
+            var ideasPanel = document.getElementById("ideas-panel");
+            var newIdea = document.createElement("div");
+            newIdea.className = "idea";
+            newIdea.innerHTML = "<strong>" + shortDescription + "</strong><br>" + details;
+            ideasPanel.appendChild(newIdea);
+        }
+    </script>
+</body>
+</html>
