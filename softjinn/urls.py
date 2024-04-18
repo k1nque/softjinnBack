@@ -22,5 +22,7 @@ from main_app import views as main_app_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('createNewIdea', main_app_views.createNewIdea),
+    path('getAllIdeas', main_app_views.getAllIdeas),
     path('', main_app_views.home)
 ]

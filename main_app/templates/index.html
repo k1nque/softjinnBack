@@ -32,9 +32,42 @@
     </div>
 
     <script>
+        async function getAllIdeas() {
+            const ideas = await fetch("/getAllIdeas")
+                .then(
+                        (response) => response.json()
+                    );
+            return ideas;
+        }
+
+        getAllIdeas().then((ideas) => {
+            ideas.forEach((idea) => {
+                addIdea(idea["shortDescription"], idea["details"]);
+            });
+        });
+        {% comment %} console.log(ideas); {% endcomment %}
+        
+        toggleAddIdea();
+
+
+        async function postFormData(shortDescription, details) {
+            const response = await fetch("/createNewIdea", {
+                method: "POST",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "shortDescription":shortDescription,
+                    "details": details
+                })
+            });
+        }
+
+
         function toggleAddIdea() {
-            var overlay = document.getElementById("overlay");
-            var addIdeaPopup = document.getElementById("add-idea-popup");
+            let overlay = document.getElementById("overlay");
+            let addIdeaPopup = document.getElementById("add-idea-popup");
 
             overlay.style.display = overlay.style.display === "none" ? "block" : "none";
             addIdeaPopup.style.display = addIdeaPopup.style.display === "none" ? "block" : "none";
@@ -44,14 +77,15 @@
             e.preventDefault();
             let shortDescription = document.getElementById("short-description").value;
             let details = document.getElementById("details").value;
+            postFormData(shortDescription, details).then(() => undefined);
             addIdea(shortDescription, details);
             document.getElementById("add-idea-form").reset();
             toggleAddIdea();
         });
 
         function addIdea(shortDescription, details) {
-            var ideasPanel = document.getElementById("ideas-panel");
-            var newIdea = document.createElement("div");
+            let ideasPanel = document.getElementById("ideas-panel");
+            let newIdea = document.createElement("div");
             newIdea.className = "idea";
             newIdea.innerHTML = "<strong>" + shortDescription + "</strong><br>" + details;
             ideasPanel.appendChild(newIdea);
