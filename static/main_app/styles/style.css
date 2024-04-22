@@ -24,7 +24,7 @@ body, html {
 .add-idea-button:hover {
     background-color: #45a049; /* Изменение цвета при наведении */
 }
-#overlay {
+#overlay, #overlay-details {
     display: none;
     position: fixed;
     top: 0;
@@ -87,4 +87,39 @@ button[type="submit"]:hover {
     border: 1px solid #ddd;
     margin-bottom: 10px;
     padding: 10px;
+}
+.view-details-button {
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    width: 150px;
+    float: right;
+}
+#details-popup {
+    background-color: #ffffff;
+    padding: 20px;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 400px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    z-index: 2;
+}
+.details-content {
+    height: 100%;
+}
+.close-button {
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+#executors-list {
+    list-style-type: none;
+    padding: 0;
 }
