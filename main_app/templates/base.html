@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="{% static 'main_app/styles/style.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сайт для хранения идей</title>
+</head>
+<body>
+    <div class="header">
+        {% if request.user.is_authenticated %}
+            <li> {{user.username}} | <a href="{% url 'logout' %}"> Выйти </a></li>
+        {% else %}
+            <li> <a href="{% url 'register' %}"> Регистрация </a> | <a href="{% url "login" %}"> Авторизация </a></li>
+        {% endif %}
+        {% block header %}
+        {% endblock header %}
+    </div>
+
+    <div id="overlay"></div>
+    <div id="overlay-details"></div>
+
+    {% block content %}
+    {% endblock %}    
+</body>
+</html>

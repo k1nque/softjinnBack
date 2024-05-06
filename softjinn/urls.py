@@ -24,5 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('createNewIdea', main_app_views.createNewIdea),
     path('getAllIdeas', main_app_views.getAllIdeas),
-    path('', main_app_views.home)
+    path('login/', main_app_views.LoginUser.as_view(), name='login'),
+    path('register/', main_app_views.RegisterUser.as_view(), name='register'),
+    path('logout/', main_app_views.logout_user, name='logout'),
+    path('', main_app_views.home, name='home')
 ]

@@ -1,5 +1,10 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
+from django.views.generic import CreateView
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import logout
+from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
+from main_app.forms import RegisterUserForm, LoginUserForm
 from json import loads, dumps
 from main_app.models import wishes
 
@@ -25,3 +30,22 @@ def getAllIdeas(request):
     if request.method == "GET":
         ideas = [{"shortDescription": idea.title, "details": idea.description} for idea in wishes.objects.all()]
         return HttpResponse(content=dumps(ideas))
+    
+
+def logout_user(request):
+    logout(request)
+    return redirect('home')
+
+
+class RegisterUser(CreateView):
+    form_class = RegisterUserForm
+    success_url = reverse_lazy('login')
+    template_name = 'register.html'
+
+
+class LoginUser(LoginView):
+    form_class = LoginUserForm
+    template_name = 'login.html'
+
+    def get_success_url(self) -> str:
+        return reverse_lazy('home')

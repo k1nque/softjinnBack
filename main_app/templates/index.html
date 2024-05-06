@@ -1,51 +1,43 @@
+{% extends "base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <link rel="stylesheet" href="{% static 'main_app/styles/style.css' %}">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сайт для хранения идей</title>
-</head>
-<body>
-    <div class="header">
-        <button class="add-idea-button" onclick="toggleAddIdea()">Добавить идею</button>
-    </div>
+{% block header %}
+<button class="add-idea-button" onclick="toggleAddIdea()">Добавить идею</button>
+{% endblock header %}
 
-    <div id="overlay"></div>
-    <div id="overlay-details"></div>
 
-    <div id="add-idea-popup">
-        <span class="close-button" onclick="toggleAddIdea()">&times;</span>
-        <h2>Добавить идею</h2>
-        <form id="add-idea-form">
-            <label for="short-description">Краткое описание:</label><br>
-            <input type="text" id="short-description" name="short-description"><br>
-            <label for="details">Подробности:</label><br>
-            <textarea id="details" name="details" rows="4"></textarea><br>
-            <button type="submit">Отправить</button>
+{% block content %}
+
+<div id="add-idea-popup">
+    <span class="close-button" onclick="toggleAddIdea()">&times;</span>
+    <h2>Добавить идею</h2>
+    <form id="add-idea-form">
+        <label for="short-description">Краткое описание:</label><br>
+        <input type="text" id="short-description" name="short-description"><br>
+        <label for="details">Подробности:</label><br>
+        <textarea id="details" name="details" rows="4"></textarea><br>
+        <button type="submit">Отправить</button>
+    </form>
+</div>
+
+<div id="details-popup">
+    <div class="details-content">
+        <span class="close-button" onclick="toggleDetails()">&times;</span>
+        <h2>Подробности</h2>
+        <p id="details-text"></p>
+        <ul id="executors-list"></ul>
+        <form id="add-executor-form">
+            <label for="new-executor">Подпишитесь, если собираетесь исполнить:</label><br>
+            <input type="text" id="new-executor" name="new-executor"><br>
+            <button type="submit">Исполнить</button>
         </form>
     </div>
+</div>
 
-    <div id="details-popup">
-        <div class="details-content">
-            <span class="close-button" onclick="toggleDetails()">&times;</span>
-            <h2>Подробности</h2>
-            <p id="details-text"></p>
-            <ul id="executors-list"></ul>
-            <form id="add-executor-form">
-                <label for="new-executor">Подпишитесь, если собираетесь исполнить:</label><br>
-                <input type="text" id="new-executor" name="new-executor"><br>
-                <button type="submit">Исполнить</button>
-            </form>
-        </div>
-    </div>
+<div class="ideas-panel" id="ideas-panel">
+    <!-- Панель для добавленных идей будет появляться здесь -->
+</div>
 
-    <div class="ideas-panel" id="ideas-panel">
-        <!-- Панель для добавленных идей будет появляться здесь -->
-    </div>
+<script src="{% static 'main_app/scripts/index.js' %}"> </script>
 
-    <script src="{% static 'main_app/scripts/index.js' %}"> </script>
-</body>
-</html>
+{% endblock %}
