@@ -27,5 +27,6 @@ urlpatterns = [
     path('login/', main_app_views.LoginUser.as_view(), name='login'),
     path('register/', main_app_views.RegisterUser.as_view(), name='register'),
     path('logout/', main_app_views.logout_user, name='logout'),
+    path('ideas/<str:id>', main_app_views.ShowIdea.as_view()),
     path('', main_app_views.home, name='home')
 ]

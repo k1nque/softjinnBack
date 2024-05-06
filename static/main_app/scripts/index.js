@@ -8,7 +8,7 @@ async function getAllIdeas() {
 
 getAllIdeas().then((ideas) => {
     ideas.forEach((idea) => {
-        addIdea(idea["shortDescription"], idea["details"]);
+        addIdea(idea["id"], idea["shortDescription"], idea["details"]);
     });
 });
 
@@ -47,15 +47,17 @@ document.getElementById("add-idea-form").addEventListener("submit", function(e) 
     let shortDescription = document.getElementById("short-description").value;
     let details = document.getElementById("details").value;
     postFormData(shortDescription, details).then(() => undefined);
-    addIdea(shortDescription, details);
+    addIdea(undefined, shortDescription, details);
     document.getElementById("add-idea-form").reset();
     toggleAddIdea();
 });
 
-function addIdea(shortDescription, details) {
+function addIdea(id, shortDescription, details) {
     var ideasPanel = document.getElementById("ideas-panel");
     var newIdea = document.createElement("div");
     newIdea.className = "idea";
+    var link = document.createElement('a');
+    link.href = `/ideas/${id}`
     var strongElement = document.createElement("strong");
     strongElement.textContent = shortDescription;
     var brElement = document.createElement("br");
@@ -66,7 +68,8 @@ function addIdea(shortDescription, details) {
     viewDetailsButton.onclick = function() {
         showDetails(details);
     };
-    newIdea.appendChild(strongElement);
+    link.appendChild(strongElement);
+    newIdea.appendChild(link);
     newIdea.appendChild(brElement);
     newIdea.appendChild(detailsText);
     newIdea.appendChild(viewDetailsButton);

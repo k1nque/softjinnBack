@@ -1,5 +1,7 @@
+from django.db.models.base import Model as Model
+from django.db.models.query import QuerySet
 from django.shortcuts import render, HttpResponse, redirect
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 from django.urls import reverse_lazy
@@ -28,7 +30,7 @@ def createNewIdea(request):
 @csrf_exempt
 def getAllIdeas(request):
     if request.method == "GET":
-        ideas = [{"shortDescription": idea.title, "details": idea.description} for idea in wishes.objects.all()]
+        ideas = [{"id": str(idea.wish_id), "shortDescription": idea.title, "details": idea.description} for idea in wishes.objects.all()]
         return HttpResponse(content=dumps(ideas))
     
 
@@ -49,3 +51,13 @@ class LoginUser(LoginView):
 
     def get_success_url(self) -> str:
         return reverse_lazy('home')
+    
+
+class ShowIdea(DetailView):
+    model = wishes
+    template_name = 'idea.html'
+    context_object_name = 'idea'
+    
+
+    def get_object(self):
+        return wishes.objects.get(wish_id=self.kwargs['id'])
