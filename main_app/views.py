@@ -78,7 +78,6 @@ def make_response(request, id):
     if request.method == "POST":
         session_key = loads(request.body)["sessionId"]
         session = Session.objects.get(session_key=session_key)
-        print(session)
         uid = session.get_decoded().get('_auth_user_id')
         user = User.objects.get(pk=uid)
         wish = wishes.objects.get(wish_id=id)

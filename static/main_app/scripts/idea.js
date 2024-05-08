@@ -1,7 +1,6 @@
 function makeResponse() {
     const sessionCookie = getCookie("sessionid");
     const csrftoken = getCookie("csrftoken");
-    console.log(sessionCookie);
     sendResponse(sessionCookie, csrftoken).then(() => undefined);
     setTimeout(() => {  location.reload(); }, 1000);
 }
