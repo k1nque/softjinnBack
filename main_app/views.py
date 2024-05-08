@@ -4,11 +4,13 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.views.generic import CreateView, DetailView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
+from django.contrib.auth.models import User
+from django.contrib.sessions.models import Session
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from main_app.forms import RegisterUserForm, LoginUserForm
 from json import loads, dumps
-from main_app.models import wishes
+from main_app.models import wishes, wishes_to_implements
 
 
 def home(request):
@@ -61,3 +63,25 @@ class ShowIdea(DetailView):
 
     def get_object(self):
         return wishes.objects.get(wish_id=self.kwargs['id'])
+    
+    
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        objs = wishes_to_implements.objects.filter(wish_id=self.kwargs['id'])
+        context["usernames"] = [el.implementer_username.username for el in objs]
+        return context
+
+
+def make_response(request, id):
+    if request.method == "POST":
+        session_key = loads(request.body)["sessionId"]
+        session = Session.objects.get(session_key=session_key)
+        print(session)
+        uid = session.get_decoded().get('_auth_user_id')
+        user = User.objects.get(pk=uid)
+        wish = wishes.objects.get(wish_id=id)
+        w2e = wishes_to_implements(wish_id=wish, implementer_username=user)
+        w2e.save()
+        return HttpResponse(status=200)
+    else:
+        return HttpResponse(status=400)

@@ -18,15 +18,25 @@ from django.contrib import admin
 from django.urls import path
 
 from . import views
-from main_app import views as main_app_views
+from main_app.views import (
+                            createNewIdea,
+                            getAllIdeas,
+                            LoginUser,
+                            RegisterUser,
+                            ShowIdea,
+                            logout_user,
+                            make_response,
+                            home,
+                            )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('createNewIdea', main_app_views.createNewIdea),
-    path('getAllIdeas', main_app_views.getAllIdeas),
-    path('login/', main_app_views.LoginUser.as_view(), name='login'),
-    path('register/', main_app_views.RegisterUser.as_view(), name='register'),
-    path('logout/', main_app_views.logout_user, name='logout'),
-    path('ideas/<str:id>', main_app_views.ShowIdea.as_view()),
-    path('', main_app_views.home, name='home')
+    path('createNewIdea', createNewIdea),
+    path('getAllIdeas', getAllIdeas),
+    path('login/', LoginUser.as_view(), name='login'),
+    path('register/', RegisterUser.as_view(), name='register'),
+    path('logout/', logout_user, name='logout'),
+    path('ideas/<str:id>/makeResponse', make_response),
+    path('ideas/<str:id>', ShowIdea.as_view()),
+    path('', home, name='home')
 ]

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 <h1> {{idea.title}} </h1>
@@ -6,5 +7,17 @@
 <p> 
     {{idea.description|linebreaks}}
 </p>
+<ul>
+{% for user in usernames %}
+<li>{{user}}</li>
+{% endfor %}
+</ul>
+
+{% if request.user.is_authenticated %}
+<button class="response-button" onclick="makeResponse()">Откликнуться</button>
+{% endif %}
+
+<script src="{% static 'main_app/scripts/idea.js' %}"> </script>
+
 {% endblock content %}
 
