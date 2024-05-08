@@ -80,8 +80,11 @@ def make_response(request, id):
         uid = session.get_decoded().get('_auth_user_id')
         user = User.objects.get(pk=uid)
         wish = wishes.objects.get(wish_id=id)
-        w2e = wishes_to_implements(wish_id=wish, implementer_username=user)
-        w2e.save()
+        try:
+            wishes_to_implements.objects.get(wish_id=wish, implementer_username=user)
+        except wishes_to_implements.DoesNotExist:
+            w2e = wishes_to_implements(wish_id=wish, implementer_username=user)
+            w2e.save()
         return HttpResponse(status=200)
     else:
         return HttpResponse(status=400)
