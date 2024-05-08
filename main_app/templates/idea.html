@@ -13,7 +13,7 @@
 {% endfor %}
 </ul>
 
-{% if request.user.is_authenticated %}
+{% if request.user.is_authenticated and not isUserResponsed%}
 <button class="response-button" onclick="makeResponse()">Откликнуться</button>
 {% endif %}
 

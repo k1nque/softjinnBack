@@ -68,7 +68,9 @@ class ShowIdea(DetailView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         objs = wishes_to_implements.objects.filter(wish_id=self.kwargs['id'])
+        username = self.request.user.username
         context["usernames"] = [el.implementer_username.username for el in objs]
+        context["isUserResponsed"] = username in context["usernames"]
         return context
 
 
