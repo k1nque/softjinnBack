@@ -1,9 +1,14 @@
 function makeResponse() {
-    const sessionCookie = getCookie("sessionid");
-    const csrftoken = getCookie("csrftoken");
-    sendResponse(sessionCookie, csrftoken).then(() => undefined);
-    setTimeout(() => {  location.reload(); }, 1000);
+    sendResponse("/makeResponse").then(() => undefined);
+    setTimeout(() => { location.reload(); }, 300);
 }
+
+
+function deleteResponse() {
+    sendResponse("/deleteResponse").then(() => undefined);
+    setTimeout(() => { location.reload(); }, 300);
+}
+
 
 function getCookie(name) {
     var nameEQ = name + "=";
@@ -16,16 +21,18 @@ function getCookie(name) {
     return null;
 }
 
-async function sendResponse(sessionId, csrfToken) {
-    const response = await fetch(window.location.href + "/makeResponse", {
+
+async function sendResponse(command) {
+    const response = await fetch(window.location.href + command, {
         method: "POST",
         cache: "no-cache",
         headers: {
             "Content-Type": "application/json",
-            "X-CSRFToken": csrfToken
+            "X-CSRFToken": getCookie("csrftoken")
         },
         body: JSON.stringify({
-            "sessionId": sessionId
+            "sessionId": getCookie("sessionid")
+
         })
     });
 }

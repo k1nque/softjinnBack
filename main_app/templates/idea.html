@@ -15,6 +15,8 @@
 
 {% if request.user.is_authenticated and not isUserResponsed%}
 <button class="response-button" onclick="makeResponse()">Откликнуться</button>
+{% else %}
+<button class="response-button" onclick="deleteResponse()">Убрать отклик</button>
 {% endif %}
 
 <script src="{% static 'main_app/scripts/idea.js' %}"> </script>

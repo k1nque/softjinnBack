@@ -21,12 +21,12 @@ def home(request):
 def createNewIdea(request):
     if request.method == "POST":
         data = loads(request.body)
-        print(data)
         wish = wishes(title=data["shortDescription"], description=data["details"])
         wish.save()
-        return HttpResponse(status_code=200)
+        print(dumps(str(wish.wish_id)))
+        return HttpResponse(status=200, content=dumps(str(wish.wish_id)))
     else:
-        return HttpResponse(status_code=400)
+        return HttpResponse(status=400)
 
 
 @csrf_exempt
@@ -86,6 +86,23 @@ def make_response(request, id):
         except wishes_to_implements.DoesNotExist:
             w2e = wishes_to_implements(wish_id=wish, implementer_username=user)
             w2e.save()
+        return HttpResponse(status=200)
+    else:
+        return HttpResponse(status=400)
+
+
+def delete_response(request, id):
+    if request.method == "POST":
+        session_key = loads(request.body)["sessionId"]
+        session = Session.objects.get(session_key=session_key)
+        uid = session.get_decoded().get('_auth_user_id')
+        user = User.objects.get(pk=uid)
+        wish = wishes.objects.get(wish_id=id)
+        try:
+            wishes_to_implements.objects.filter(wish_id=wish, implementer_username=user).delete()
+            print(wishes_to_implements.objects.all())
+        except wishes_to_implements.DoesNotExist:
+            return HttpResponse(status=400)
         return HttpResponse(status=200)
     else:
         return HttpResponse(status=400)

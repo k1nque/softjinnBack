@@ -26,6 +26,7 @@ from main_app.views import (
                             ShowIdea,
                             logout_user,
                             make_response,
+                            delete_response,
                             home,
                             )
 
@@ -37,6 +38,7 @@ urlpatterns = [
     path('register/', RegisterUser.as_view(), name='register'),
     path('logout/', logout_user, name='logout'),
     path('ideas/<str:id>/makeResponse', make_response),
+    path('ideas/<str:id>/deleteResponse', delete_response),
     path('ideas/<str:id>', ShowIdea.as_view()),
     path('', home, name='home')
 ]

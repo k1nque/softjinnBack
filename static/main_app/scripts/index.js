@@ -24,6 +24,9 @@ async function postFormData(shortDescription, details) {
             "details": details
         })
     });
+
+    const data = await response.json();
+    return data;
 }
 
 function toggleAddIdea() {
@@ -46,8 +49,7 @@ document.getElementById("add-idea-form").addEventListener("submit", function(e) 
     e.preventDefault();
     let shortDescription = document.getElementById("short-description").value;
     let details = document.getElementById("details").value;
-    postFormData(shortDescription, details).then(() => undefined);
-    addIdea(undefined, shortDescription, details);
+    postFormData(shortDescription, details).then((data) => addIdea(data, shortDescription, details));
     document.getElementById("add-idea-form").reset();
     toggleAddIdea();
 });
@@ -57,6 +59,7 @@ function addIdea(id, shortDescription, details) {
     var newIdea = document.createElement("div");
     newIdea.className = "idea";
     var link = document.createElement('a');
+    link.id = "idea-link"
     link.href = `/ideas/${id}`
     var strongElement = document.createElement("strong");
     strongElement.textContent = shortDescription;
