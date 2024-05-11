@@ -16,7 +16,8 @@
 
 {% if request.user.is_authenticated and not isUserResponsed%}
 <button class="response-button" onclick="makeResponse()">Откликнуться</button>
-{% else %}
+{% endif %}
+{% if request.user.is_authenticated and isUserResponsed %}
 <button class="response-button" onclick="deleteResponse()">Убрать отклик</button>
 {% endif %}
 </div>
