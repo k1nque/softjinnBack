@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+<div id="idea-content">
 <h1> {{idea.title}} </h1>
 
 <p> 
@@ -18,6 +19,7 @@
 {% else %}
 <button class="response-button" onclick="deleteResponse()">Убрать отклик</button>
 {% endif %}
+</div>
 
 <script src="{% static 'main_app/scripts/idea.js' %}"> </script>
 

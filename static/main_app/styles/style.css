@@ -10,10 +10,17 @@ body, html {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    height: 10%;
+    height: 5%;
+}
+.header li {
+    list-style-type: none;
 }
 .add-idea-button {
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
     width: 150px; /* Ширина кнопки 150px */
+    height: 50px;
     background-color: #4caf50; /* Зеленый цвет для кнопки */
     color: white;
     padding: 8px 16px;
@@ -42,8 +49,8 @@ body, html {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 500px;
-    height: 400px;
+    width: 90%;
+    height: 40%;
     box-sizing: border-box;
     border-radius: 10px; /* Скругление окна ввода */
     z-index: 2;
@@ -57,6 +64,7 @@ body, html {
     cursor: pointer;
 }
 input[type="text"],
+input[type="password"],
 textarea,
 button {
     padding: 8px;
@@ -78,7 +86,8 @@ button[type="submit"]:hover {
 }
 .ideas-panel {
     margin-top: 20px;
-    width: 80%; /* Ширина панели с идеями 80% */
+    padding-top: 10px;
+    width: 90%; /* Ширина панели с идеями 90% */
     margin: auto;
 }
 .idea {
@@ -89,13 +98,7 @@ button[type="submit"]:hover {
     padding: 10px;
 }
 .view-details-button {
-    background-color: #4caf50;
-    color: white;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    width: 150px;
-    float: right;
+    display: none;
 }
 #details-popup {
     background-color: #ffffff;
@@ -122,4 +125,12 @@ button[type="submit"]:hover {
 #executors-list {
     list-style-type: none;
     padding: 0;
+}
+body form {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+#idea-content { /*Страница идеи, основной контент под хэдером*/
+    width: 90%;
+    margin: auto;
 }
