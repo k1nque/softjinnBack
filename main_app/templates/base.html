@@ -10,6 +10,9 @@
 </head>
 <body>
     <div class="header">
+        <div>
+            <a href='/'> Домой </a>
+        </div>
         {% if request.user.is_authenticated %}
             <li> {{user.username}} | <a href="{% url 'logout' %}"> Выйти </a></li>
         {% else %}
