@@ -2,9 +2,7 @@
 {% load static %}
 
 {% block header %}
-{% if request.user.is_authenticated %}
 <button class="add-idea-button" onclick="toggleAddIdea()">Предложить идею</button>
-{% endif %}
 {% endblock header %}
 
 {% block content %}
