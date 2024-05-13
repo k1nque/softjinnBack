@@ -3,7 +3,7 @@
 
 {% block header %}
 {% if request.user.is_authenticated %}
-<button class="add-idea-button" onclick="toggleAddIdea()">Добавить идею</button>
+<button class="add-idea-button" onclick="toggleAddIdea()">Предложить идею</button>
 {% endif %}
 {% endblock header %}
 
@@ -11,7 +11,7 @@
 
 <div id="add-idea-popup">
     <span class="close-button" onclick="toggleAddIdea()">&times;</span>
-    <h2>Добавить идею</h2>
+    <h2>Опишите идею</h2>
     <form id="add-idea-form">
         <label for="short-description">Краткое описание:</label><br>
         <input type="text" id="short-description" name="short-description"><br>
