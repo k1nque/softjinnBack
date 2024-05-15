@@ -8,17 +8,21 @@
 <p> 
     {{idea.description|linebreaks}}
 </p>
-<ul id="implementations-list">
-{% for user in users %}
-<li><a href={{user.1}}>{{user.0}}</a></li>
-{% endfor %}
-</ul>
+{% if len(users) == 0 %}
+    <p>Для этой идеи ещё нет реализаций :(<p>
+{% else %}
+    <p>Реализации:<p>
+    {% for user in users %}
+    <li><a href={{user.1}}>{{user.0}}</a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
 
 {% if request.user.is_authenticated and not isUserResponsed%}
 <form id="make-response-form">
-    <label for="link">Предложите свою реализацию</label>
+    <label for="link">Предложите своё решение</label>
     <br>
-    <input type="url" id="link-field" placeholder="Ссылка на вашу реализацию"> </input>
+    <input type="url" id="link-field" placeholder="Вставьте ссылку на реализацию"> </input>
     <br>
     <button class="submit">Откликнуться</button>
 </form>
