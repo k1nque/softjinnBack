@@ -8,15 +8,15 @@
 <p> 
     {{idea.description|linebreaks}}
 </p>
-{% if len(users) == 0 %}
+{% comment %} {% if len(users) == 0 %}
     <p>Для этой идеи ещё нет реализаций :(<p>
-{% else %}
+{% else %} {% endcomment %}
     <p>Реализации:<p>
     {% for user in users %}
     <li><a href={{user.1}}>{{user.0}}</a></li>
     {% endfor %}
     </ul>
-{% endif %}
+{% comment %} {% endif %} {% endcomment %}
 
 {% if request.user.is_authenticated and not isUserResponsed%}
 <form id="make-response-form">
