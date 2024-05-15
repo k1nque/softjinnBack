@@ -59,24 +59,26 @@ class ShowIdea(DetailView):
     model = wishes
     template_name = 'idea.html'
     context_object_name = 'idea'
-    
 
     def get_object(self):
         return wishes.objects.get(wish_id=self.kwargs['id'])
-    
     
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         objs = wishes_to_implements.objects.filter(wish_id=self.kwargs['id'])
         username = self.request.user.username
-        context["usernames"] = [el.implementer_username.username for el in objs]
-        context["isUserResponsed"] = username in context["usernames"]
+        context["users"] = [(el.implementer_username.username, el.implementation_link) for el in objs]
+        context["isUserResponsed"] = True in [username == el[0] for el in context["users"]]
+
         return context
 
 
 def make_response(request, id):
     if request.method == "POST":
-        session_key = loads(request.body)["sessionId"]
+        data = loads(request.body)
+        session_key = data["sessionId"]
+        link = data["link"]
+        print(link)
         session = Session.objects.get(session_key=session_key)
         uid = session.get_decoded().get('_auth_user_id')
         user = User.objects.get(pk=uid)
@@ -84,7 +86,7 @@ def make_response(request, id):
         try:
             wishes_to_implements.objects.get(wish_id=wish, implementer_username=user)
         except wishes_to_implements.DoesNotExist:
-            w2e = wishes_to_implements(wish_id=wish, implementer_username=user)
+            w2e = wishes_to_implements(wish_id=wish, implementer_username=user, implementation_link=link)
             w2e.save()
         return HttpResponse(status=200)
     else:

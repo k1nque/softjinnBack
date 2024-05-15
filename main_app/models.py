@@ -22,6 +22,7 @@ class wishes_to_implements(models.Model):
     implementer_username = models.ForeignKey(
         User, verbose_name="Пользователь-реализатор", on_delete=models.CASCADE, null=False
     )
+    implementation_link = models.URLField(null=True)
 
     def __str__(self) -> str:
         return f'{self.wish_id}: {self.implementer_username}'

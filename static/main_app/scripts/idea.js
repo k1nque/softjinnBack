@@ -1,5 +1,5 @@
-function makeResponse() {
-    sendResponse("/makeResponse").then(() => undefined);
+function makeResponse(link) {
+    sendResponse("/makeResponse", link).then(() => undefined);
     setTimeout(() => { location.reload(); }, 300);
 }
 
@@ -22,7 +22,7 @@ function getCookie(name) {
 }
 
 
-async function sendResponse(command) {
+async function sendResponse(command, link=undefined) {
     const response = await fetch(window.location.href + command, {
         method: "POST",
         cache: "no-cache",
@@ -31,8 +31,15 @@ async function sendResponse(command) {
             "X-CSRFToken": getCookie("csrftoken")
         },
         body: JSON.stringify({
-            "sessionId": getCookie("sessionid")
-
+            "sessionId": getCookie("sessionid"),
+            "link": link
         })
     });
 }
+
+
+document.getElementById("make-response-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    let link = document.getElementById("link-field").value;
+    makeResponse(link);
+});

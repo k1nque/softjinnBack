@@ -9,13 +9,19 @@
     {{idea.description|linebreaks}}
 </p>
 <ul>
-{% for user in usernames %}
-<li>{{user}}</li>
+{% for user in users %}
+<li><a href={{user.1}}>{{user.0}}</a></li>
 {% endfor %}
 </ul>
 
 {% if request.user.is_authenticated and not isUserResponsed%}
-<button class="response-button" onclick="makeResponse()">Откликнуться</button>
+<form id="make-response-form">
+    <label for="link"> Вставьте ссылку на свою реализацию идеи </label>
+    <br>
+    <input type="url" id="link-field"> </input>
+    <br>
+    <button class="submit">Откликнуться</button>
+</form>
 {% endif %}
 {% if request.user.is_authenticated and isUserResponsed %}
 <button class="response-button" onclick="deleteResponse()">Убрать отклик</button>
