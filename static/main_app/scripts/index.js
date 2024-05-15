@@ -68,7 +68,7 @@ function addIdea(id, shortDescription, details) {
     detailsDiv.textContent = details;
     link.appendChild(strongElement);
     newIdea.appendChild(link);
-    newIdea.appendChild(detailsText);
+    newIdea.appendChild(detailsDiv);
     ideasPanel.appendChild(newIdea);
 }
 
