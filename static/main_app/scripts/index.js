@@ -66,17 +66,9 @@ function addIdea(id, shortDescription, details) {
     var detailsDiv = document.createElement('div');
     detailsDiv.className = "idea-description";
     detailsDiv.textContent = details;
-    var viewDetailsButton = document.createElement("button");
-    viewDetailsButton.className = "view-details-button";
-    viewDetailsButton.textContent = "Показать детали";
-    viewDetailsButton.onclick = function() {
-        showDetails(details);
-    };
     link.appendChild(strongElement);
     newIdea.appendChild(link);
-    newIdea.appendChild(brElement);
     newIdea.appendChild(detailsText);
-    newIdea.appendChild(viewDetailsButton);
     ideasPanel.appendChild(newIdea);
 }
 
