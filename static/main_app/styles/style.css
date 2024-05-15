@@ -98,6 +98,7 @@ button[type="submit"]:hover {
     border: 1px solid #ddd;
     margin-bottom: 10px;
     padding: 10px;
+    cursor: pointer;
 }
 .view-details-button {
     display: none;
@@ -186,6 +187,7 @@ body form {
     padding-inline-start: 0;
 }
 #idea-link {
+    color: black;
     text-decoration: none;
 }
 #idea-link,
