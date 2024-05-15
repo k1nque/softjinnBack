@@ -57,6 +57,9 @@ document.getElementById("add-idea-form").addEventListener("submit", function(e) 
 function addIdea(id, shortDescription, details) {
     var ideasPanel = document.getElementById("ideas-panel");
     var newIdea = document.createElement("div");
+    newIdea.onclick = function() {
+        location.href = `/ideas/${id}`;
+    }
     newIdea.className = "idea";
     var link = document.createElement('a');
     link.id = "idea-link"
