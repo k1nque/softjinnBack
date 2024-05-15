@@ -185,3 +185,10 @@ body form {
     list-style: none;
     padding-inline-start: 0;
 }
+#idea-link,
+.idea-description {
+    display: block;
+    white-space: nowrap; /* forces text to single line */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

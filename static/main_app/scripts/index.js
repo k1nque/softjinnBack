@@ -63,8 +63,9 @@ function addIdea(id, shortDescription, details) {
     link.href = `/ideas/${id}`
     var strongElement = document.createElement("strong");
     strongElement.textContent = shortDescription;
-    var brElement = document.createElement("br");
-    var detailsText = document.createTextNode(details);
+    var detailsDiv = document.createElement('div');
+    detailsDiv.className = "idea-description";
+    detailsDiv.textContent = details;
     var viewDetailsButton = document.createElement("button");
     viewDetailsButton.className = "view-details-button";
     viewDetailsButton.textContent = "Показать детали";
