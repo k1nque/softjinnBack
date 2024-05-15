@@ -7,41 +7,34 @@
 
 {% block content %}
 <div id="idea-content">
-<h1> {{idea.title}} </h1>
-
-<p> 
-    {{idea.description|linebreaks}}
-</p>
-{% comment %} {% if len(users) == 0 %}
-    <p>Для этой идеи ещё нет реализаций :(<p>
-{% else %} {% endcomment %}
-{% if isAnyoneResponsed %}
+    <h1>{{idea.title}}</h1>
+    <p>{{idea.description|linebreaks}}</p>
     <b>Реализации:</b>
-    <ul id="implementations-list">
-    {% for user in users %}
-    <li><a href={{user.1}}>{{user.0}}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <b> <p>Для этой идеи ещё нет реализаций :(<p> </b>
-{% endif %}
-{% comment %} {% endif %} {% endcomment %}
+    {% if isAnyoneResponsed %}
+        <ul id="implementations-list">
+        {% for user in users %}
+            <li><a href={{user.1}}>{{user.0}}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Для этой идеи ещё нет реализаций :(<p>
+    {% endif %}
 
-{% if request.user.is_authenticated and not isUserResponsed%}
-<form id="make-response-form">
-    <label for="link">Предложите своё решение</label>
-    <br>
-    <input type="url" id="link-field" placeholder="Вставьте ссылку на вашу реализацию"> </input>
-    <br>
-    <button class="submit">Откликнуться</button>
-</form>
-{% endif %}
-{% if request.user.is_authenticated and isUserResponsed %}
-<button class="response-button" onclick="deleteResponse()">Убрать отклик</button>
-{% endif %}
+    {% if request.user.is_authenticated and not isUserResponsed%}
+    <form id="make-response-form">
+        <label for="link">Предложите своё решение</label>
+        <br>
+        <input type="url" id="link-field" placeholder="Вставьте ссылку на вашу реализацию"></input>
+        <br>
+        <button class="submit">Откликнуться</button>
+    </form>
+    {% endif %}
+    {% if request.user.is_authenticated and isUserResponsed %}
+        <button class="response-button" onclick="deleteResponse()">Убрать отклик</button>
+    {% endif %}
 </div>
 
-<script src="{% static 'main_app/scripts/idea.js' %}"> </script>
+<script src="{% static 'main_app/scripts/idea.js' %}"></script>
 
 {% endblock content %}
 
