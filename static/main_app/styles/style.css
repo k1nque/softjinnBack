@@ -181,3 +181,6 @@ body form {
     background-color: #3486eb;
     border-radius: 5px;
 }
+#implementations-list {
+    list-style: none;
+}

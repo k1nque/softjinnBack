@@ -8,7 +8,7 @@
 <p> 
     {{idea.description|linebreaks}}
 </p>
-<ul>
+<ul id="implementations-list">
 {% for user in users %}
 <li><a href={{user.1}}>{{user.0}}</a></li>
 {% endfor %}
@@ -16,9 +16,9 @@
 
 {% if request.user.is_authenticated and not isUserResponsed%}
 <form id="make-response-form">
-    <label for="link">Вставьте ссылку на вашу реализацию</label>
+    <label for="link">Предложите свою реализацию</label>
     <br>
-    <input type="url" id="link-field"> </input>
+    <input type="url" id="link-field" placeholder="Ссылка на вашу реализацию"> </input>
     <br>
     <button class="submit">Откликнуться</button>
 </form>
