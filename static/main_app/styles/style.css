@@ -185,6 +185,9 @@ body form {
     list-style: none;
     padding-inline-start: 0;
 }
+#idea-link {
+    text-decoration: none;
+}
 #idea-link,
 .idea-description {
     display: block;
