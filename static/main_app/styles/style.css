@@ -182,5 +182,6 @@ body form {
     border-radius: 5px;
 }
 #implementations-list {
+    list-style: none;
     padding-inline-start: 0;
 }
