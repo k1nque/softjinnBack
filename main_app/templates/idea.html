@@ -12,7 +12,7 @@
     <p>Для этой идеи ещё нет реализаций :(<p>
 {% else %} {% endcomment %}
     <p>Реализации:<p>
-    <ul>
+    <ul id="implementations-list">
     {% for user in users %}
     <li><a href={{user.1}}>{{user.0}}</a></li>
     {% endfor %}
