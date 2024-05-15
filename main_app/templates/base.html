@@ -11,7 +11,8 @@
 <body>
     <div class="header">
         <div class="header-content">
-            <a class="home-button" href='/'>Назад</a>
+            {% block back-button %}
+            {% endblock back-button %}
             {% if request.user.is_authenticated %}
                 <div class="header-username">{{user.username}}</div>
                 <a class="logout-button" href="{% url 'logout' %}">Выйти</a>

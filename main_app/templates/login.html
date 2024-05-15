@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block back-button%}
+<a class="home-button" href='/'>Назад</a>
+{% endblock back-button%}
+
 {% block content %}
 <form method="post">
     {% csrf_token %}

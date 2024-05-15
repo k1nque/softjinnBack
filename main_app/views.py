@@ -68,6 +68,7 @@ class ShowIdea(DetailView):
         objs = wishes_to_implements.objects.filter(wish_id=self.kwargs['id'])
         username = self.request.user.username
         context["users"] = [(el.implementer_username.username, el.implementation_link) for el in objs]
+        context["isAnyoneResponsed"] = len(context["users"]) > 0
         context["isUserResponsed"] = True in [username == el[0] for el in context["users"]]
 
         return context

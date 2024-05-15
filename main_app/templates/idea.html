@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block back-button%}
+<a class="home-button" href='/'>Назад</a>
+{% endblock back-button%}
+
 {% block content %}
 <div id="idea-content">
 <h1> {{idea.title}} </h1>
@@ -11,12 +15,16 @@
 {% comment %} {% if len(users) == 0 %}
     <p>Для этой идеи ещё нет реализаций :(<p>
 {% else %} {% endcomment %}
+{% if isAnyoneResponsed %}
     <b>Реализации:</b>
     <ul id="implementations-list">
     {% for user in users %}
     <li><a href={{user.1}}>{{user.0}}</a></li>
     {% endfor %}
     </ul>
+{% else %}
+    <b> <p>Для этой идеи ещё нет реализаций :(<p> </b>
+{% endif %}
 {% comment %} {% endif %} {% endcomment %}
 
 {% if request.user.is_authenticated and not isUserResponsed%}
