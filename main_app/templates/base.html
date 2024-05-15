@@ -10,14 +10,16 @@
 </head>
 <body>
     <div class="header">
-        <div id="home">
-            <a href='/'> Домой </a>
+        <div class="header-content">
+            <a class="home-button" href='/'>Домой</a>
+            {% if request.user.is_authenticated %}
+                <div class="header-username">{{user.username}}</div>
+                <a class="logout-button" href="{% url 'logout' %}">Выйти</a>
+            {% else %}
+                <a class="register-button" href="{% url 'register' %}">Регистрация</a>
+                <a class="login-button" href="{% url 'login' %}">Войти</a>
+            {% endif %}
         </div>
-        {% if request.user.is_authenticated %}
-            <li> {{user.username}} | <a href="{% url 'logout' %}"> Выйти </a></li>
-        {% else %}
-            <li> <a href="{% url 'register' %}"> Регистрация </a> | <a href="{% url "login" %}"> Авторизация </a></li>
-        {% endif %}
         {% block header %}
         {% endblock header %}
     </div>

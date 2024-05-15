@@ -6,11 +6,12 @@ body, html {
 }
 .header {
     background-color: #74a9eb; /* Голубой цвет для шапки */
-    padding: 15px;
-    display: flex;
-    justify-content: flex-end;
+    padding-top: 10px;
+    padding-bottom: 10px;
     align-items: center;
-    height: 5%;
+    justify-content: center;
+    height: auto;
+    display: flex;
 }
 .header li {
     list-style-type: none;
@@ -142,4 +143,41 @@ body form {
 #idea-content { /*Страница идеи, основной контент под хэдером*/
     width: 90%;
     margin: auto;
+}
+.header-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 90%;
+}
+.home-button,
+.header-username,
+.logout-button,
+.register-button,
+.login-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 50px;
+    text-decoration: none;
+    color: #ffffff;
+}
+.home-button {
+    justify-self: left;
+}
+.register-button {
+    justify-self: center;
+}
+.home-button,
+.register-button {
+    width: 90%;
+    background-color: #3486eb;
+    border-radius: 5px;
+}
+.logout-button,
+.login-button {
+    width: 90%;
+    justify-self: right;
+    background-color: #3486eb;
+    border-radius: 5px;
 }
